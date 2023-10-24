@@ -11,6 +11,7 @@ yarn-error.log*
 
 # Arquivos de configuração
 .env
+.env.local
 
 # Arquivos de construção
 /build/
