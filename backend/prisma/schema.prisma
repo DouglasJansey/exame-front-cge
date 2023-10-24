@@ -13,5 +13,6 @@ model Products {
   id  String  @id  @default(auto())  @map("_id") @db.ObjectId
   name String
   description String
+  image String
   category String 
 }
