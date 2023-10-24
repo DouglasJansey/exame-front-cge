@@ -4,7 +4,8 @@ export default function Document() {
     return (
         <Html lang="pt-br">
             <Head>
-                <link rel="icon" href="/logo512.png" />
+                <link rel="icon" type="image/x-icon" href="images/logoRJ.png" />
+                <meta charSet='UTF-8'/>
             </Head>
             <body>
                 <Main />
