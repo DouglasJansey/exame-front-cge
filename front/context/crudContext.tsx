@@ -1,4 +1,3 @@
-"use client"
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, createContext, useContext } from "react";
 import axios from '../services/axios';

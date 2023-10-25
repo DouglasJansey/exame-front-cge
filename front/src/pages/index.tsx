@@ -6,7 +6,6 @@ export default function Home() {
             <Head>
                 <title>Exame Prático CGE-RJ</title>
             </Head>
-           
         </div>
     );
 }

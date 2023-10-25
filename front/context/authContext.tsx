@@ -39,9 +39,13 @@ export function AuthProvider({ children }: authContextProps) {
     useEffect(() => {
         if (tokenCookie) {
             const { user }: any = decode(tokenCookie)
-            userUpdate && setUser(JSON.parse(userUpdate)!) || setUser(user) ;  
+            if(userUpdate){
+                const updateUserLogin: any = userUpdate!
+                setUser(updateUserLogin);  
+            }
+            setUser(user) 
         }
-    }, [userUpdate, tokenCookie])
+    }, [userUpdate])
     const LogOut = async () =>{
         destroyCookie(undefined, 'AUTH-TOKEN',{
           path:'/'
@@ -71,8 +75,12 @@ export function AuthProvider({ children }: authContextProps) {
             maxAge: 60 * 60 * 24,
             path: '/'
         })
+        setCookie(undefined, 'USER-INFO-TOKEN', JSON.stringify(user),{
+            maxAge: 60 * 60 * 24,
+            path:'/'
+          })
        
-        replace('/account/login')('/account/profile');
+        replace('/account/login');
         }catch(err){
             toast.error('Falha ao logar!')
         }

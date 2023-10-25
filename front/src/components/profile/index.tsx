@@ -14,6 +14,7 @@ export default function Profile() {
     const { UpdateUser, deteleUser } = useCrud();
     const [edit, setEdit] = useState(false);
     const [formData, setFormData] = useState('');
+   
 
     const handleInputForm = (ev: ChangeEvent<HTMLInputElement>) => {
         const { value }: any = ev.target
@@ -28,7 +29,7 @@ export default function Profile() {
     }
 
     useEffect(()=>{
-        const {'USER-INFO-TOKEN': userCookie} = parseCookies();
+        const {'USER-INFO-TOKEN': userCookie}: any = parseCookies();
         if(userCookie){
             const { name }: any = userCookie && JSON.parse(userCookie);
             setFormData(name);
