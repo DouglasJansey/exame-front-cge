@@ -14,7 +14,7 @@ type ProductContextType = {
     CreateProduct: (data: ProductType) => Promise<void>
     UpdateProduct: (id: string, data: {}) => Promise<void>
     deteleProduct: (id: string) => Promise<void>
-    showProduct: (data?: ProductType) => Promise<void>
+    showProduct: (data?: ProductType) => Promise<object[]>
 }
 type productContextProps = {
     children: ReactNode;
@@ -72,7 +72,8 @@ export function ProductProvider({ children }: productContextProps) {
     }
     async function showProduct(data?: {}) {
         try{
-            await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/`)
+          const productList =  await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/`).then(res => res.data)
+            return productList!
         }catch(err){
             new Error('Erro ao mostrar produtos')
         }

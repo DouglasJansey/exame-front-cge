@@ -7,38 +7,35 @@
     align-items: center
     width: 100%
     height: 100%
-    gap: 2%
 
 .text
-    color: #fff
+    color: #979797
     font-weight: normal
     font-family: $roboto
-
-.textParagraph
-    @extend .text
-    color: $color-light-blue
-    opacity: 0.8
-    a
-        text-decoration: none
-        @extend .text
-        color: $color-dark-blue
-        font-weight: bold
-.title
-    @extend .text
-    background: $color-dark-blue
-    margin-bottom: 25px
     width: 100%
-    text-align: center
-    font-size: 1.5rem
+    
+.subContainer
+    @extend .flex
+    flex-direction: column
     
 .container
     @extend .flex
+    align-items: center
+    flex: none
+    flex-direction: column
     margin: 120px 0px 20px 0px
-    width: auto
-    min-height: auto
-    background: #FFF
+    width: 220px
+    height: 320px
+    padding: 2px
+    overflow: hidden
+    background: #ffffff
     box-shadow: 0px 0px 5px #9c9c9ce3
-    gap: 5%
+    h1, h5
+        margin: 5px
+    h1
+        font-size: 1.5rem
+        width: 100%
+        
 
 .formContainer
     @extend .flex
@@ -59,22 +56,22 @@
 .labelContainer
     @extend .flex
     flex-direction: column
-    align-items: flex-start
-    width: 65%
-    height: auto
+    justify-content: space-between
+    width: 100%
     color: $color-dark-blue
+
 .label
     @extend .flex
-    flex-direction: column
-    padding: 2px
-    align-items: flex-start
+    @extend .text
     color: $color-dark-blue
-    margin-bottom: 15px
-    width: 95%
+    text-align: center
+    height: auto
+    width: 100%           
 
 .containerImage
     width: 150px
     height: 150px
+    background: red
     margin-bottom: 15px
     img
         width: 100%
