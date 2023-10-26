@@ -5,11 +5,12 @@ export const ROUTES_TYPES = {
         },
         products:{
             store: '/products/store',
-            view: '/products/listproducts'
+            update: '/products/update/[id]'
         }
     },
     public:{
         login: '/account/login',
         register: '/account/register',
+        home: '/',
     }
 }

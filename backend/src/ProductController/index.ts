@@ -24,13 +24,19 @@ class ProductController {
       res.status(500).json({ error: ["Erro ao atualizar produtos"] });
     }
   }
-  async show(req: Request, res: Response) {
-    const { page, max }: any = req.query;
-    const { ...data } = req.body;
+  async findOne(req: Request, res: Response) {
+    const { id }: any = req.query;
     try {
-      const showProduct = await productsServices.showProducts(page, max, {
-        ...data,
-      });
+      const showProduct = await productsServices.findOneProd(id);
+      return res.status(201).json(showProduct);
+    } catch (err) {
+      res.status(500).json("Error interno!");
+    }
+  }
+  async show(req: Request, res: Response) {
+    const { page, max, name, category }: any = req.query;
+    try {
+      const showProduct = await productsServices.showProducts(page, max, name, category);
       return res.status(201).json(showProduct);
     } catch (err) {
       res.status(500).json("Error interno!");

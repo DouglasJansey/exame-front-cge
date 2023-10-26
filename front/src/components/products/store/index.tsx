@@ -31,35 +31,35 @@ export default function Products() {
         <div className={style.container}>
             <form className={style.formContainer} onSubmit={(e) => handleSubmit(e)}>
                 <span className={style.title}>
-                    <p>Cadastrar</p>
+                    <p>Cadastrar produto</p>
                 </span>
             <div className={style.containerImage}><img src={ formData.imageProduct || defaultImage} alt='' /></div>
                <div className={style.labelContainer}>              
                 <label className={style.label}>
-                    Nome:
+                    Nome do produto:
                     <input className={style.inputStyle} type="text" name="name" 
-                    placeholder="Digite seu nome" value={formData.name}
+                    placeholder="Digite o nome do seu produto" value={formData.name}
                     onChange={(e) => handleInputForm(e)}
                     />
                 </label>
                 <label className={style.label}>
-                    Descrição:
+                    Descrição do produto:
                     <input className={style.inputStyle} type="text" name="description"
-                     placeholder="Digite seu email" 
+                     placeholder="Descreva seu produto!" 
                      onChange={(e) => handleInputForm(e)}
                      />
                 </label>
                 <label className={style.label}>
-                    Categoria:
+                    Categoria do produto:
                     <input className={style.inputStyle} type="text" name="category"
-                    placeholder="Digite sua senha!"
+                    placeholder="Digite a categoria do seu produto!"
                     onChange={(e) => handleInputForm(e)} />
                 </label>
                     </div>
                 <label className={style.label}>
                     Link da imagem:
                     <input className={style.inputStyle} type="text" name="imageProduct"
-                    placeholder="Digite sua senha!"
+                    placeholder="Coloque seu melhor lind de imagem!"
                     onChange={(e) => handleInputForm(e)} />
                 </label>
                 <button type='submit' className={style.buttonSubmit}>Cadastrar</button>

@@ -1,6 +1,10 @@
 @import ../_tipography
 @import ../_variable
 
+@mixin backgroundButton($color)
+    background: $color
+    
+
 .flex
     display: flex
     justify-content: center
@@ -9,7 +13,6 @@
     height: 100%
 
 .text
-    color: #979797
     font-weight: normal
     font-family: $roboto
     width: 100%
@@ -17,46 +20,28 @@
 .subContainer
     @extend .flex
     flex-direction: column
+    height: 50%
     
 .container
     @extend .flex
     align-items: center
+    position: relative
     flex: none
     flex-direction: column
-    margin: 120px 0px 20px 0px
+    margin: 10px
     width: 220px
-    height: 320px
+    height: 335px
     padding: 2px
     overflow: hidden
     background: #ffffff
     box-shadow: 0px 0px 5px #9c9c9ce3
     h1, h5
-        margin: 5px
-    h1
-        font-size: 1.5rem
-        width: 100%
+        font-weight: bold
         
-
-.formContainer
-    @extend .flex
-    @extend .text
-    font-size: 1rem
-    justify-content: center
-    align-items: center
-    flex-wrap: wrap
-    width: 100%
-    max-width: 550px
-    min-width: 250px
-    min-height: 350px
-    gap: 5%
-    @media( max-width: 650px)
-        flex-direction: column
-
 
 .labelContainer
     @extend .flex
     flex-direction: column
-    justify-content: space-between
     width: 100%
     color: $color-dark-blue
 
@@ -69,32 +54,47 @@
     width: 100%           
 
 .containerImage
-    width: 150px
-    height: 150px
-    background: red
-    margin-bottom: 15px
+    @extend .flex
+    overflow: hidden
+    margin-top: 5px
+    width: 95%
+    height: 70%
     img
-        width: 100%
+        width: 95%
         height: 100%
-
-.inputStyle
-    border: none
+        
+.title
+    @extend .flex
+    @extend .text
+    margin: 0
+    min-height: auto
+    height: 55px
+    font-size: 0.6rem
     width: 100%
-    height: 25px
-    background: $color-gray
-    &:focus
-        border: none
-        outline: none
 
-.buttonSubmit
-    padding: 15px 35px
+.description
+    @extend .flex
+    height: 25%
+    padding: 0
+    width: 100%
+    h5
+        color: #777777
+        margin: 0
+
+.containerButtons
+    @extend .flex
+    height: auto
+
+.buttonEdit
+    width: 50%
     @extend .text
     border: none
-    background: $color-dark-blue
-    opacity: 0.5
+    @include backgroundButton($color-dark-blue)
+    opacity: 0.8
     color: #fff
     cursor: pointer
-    margin-top: 15px
-    margin-bottom: 10px
     &:hover
         opacity: 1
+.buttonClose
+    @extend .buttonEdit
+    @include backgroundButton(red)

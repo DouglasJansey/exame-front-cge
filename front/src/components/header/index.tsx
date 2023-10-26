@@ -26,7 +26,7 @@ export default function Header() {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(" ", "");
-
+    if(path === 'home') return ''
     return path;
   };
   const activeLink = (url: string) => {

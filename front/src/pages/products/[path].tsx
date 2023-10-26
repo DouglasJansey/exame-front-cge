@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { ReactNode, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 import { useAuth } from "../../../context/authContext";
 
 const RegisterPeoducts = dynamic(() => import("@/components/products/store"), { ssr: false })
@@ -15,7 +14,7 @@ export default function HandlePages() {
     const { isAuthenticated } = useAuth()
     const { query, replace } = useRouter()
     const pages = query?.path;
-    console.log(query)
+
 
     const currentPage: PagesType = {
         listproducts: !isAuthenticated && replace('/account/login') || <ListProducts /> ,

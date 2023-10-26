@@ -2,6 +2,7 @@
 import { ReactNode, createContext, useContext } from "react";
 import axios from '../services/axios';
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 type ProductType = {
     name: string,
@@ -12,9 +13,10 @@ type ProductType = {
 
 type ProductContextType = {
     CreateProduct: (data: ProductType) => Promise<void>
-    UpdateProduct: (id: string, data: {}) => Promise<void>
-    deteleProduct: (id: string) => Promise<void>
-    showProduct: (data?: ProductType) => Promise<object[]>
+    UpdateProduct: (id: string, data: ProductType) => Promise<void>
+    deleteProduct: (id: string) => Promise<any>
+    findOne: (id: string) => Promise<void>
+    showProduct: (name?: string, category?: string) => Promise<object[]>
 }
 type productContextProps = {
     children: ReactNode;
@@ -23,7 +25,7 @@ type productContextProps = {
 const ProductContext = createContext({} as ProductContextType)
 
 export function ProductProvider({ children }: productContextProps) {
-
+    const { push } = useRouter()
     async function CreateProduct({name, description, category, imageProduct}:ProductType) {
         try {
              const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product`, {
@@ -41,28 +43,37 @@ export function ProductProvider({ children }: productContextProps) {
                      autoClose: 3000
                  })
              }
+             
         } catch (err) {
             toast.error('Falha no cadastrado!', {
                 autoClose: 1000
             })
         }
     }
-    async function UpdateProduct(id:string, {...data}: {}) {
+    async function UpdateProduct(id:string, data: ProductType) {
+        const {name, category, imageProduct, description} = data;
         try {
-            await axios.put(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/${id}`, {
-                data
+            await axios.put(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product?id=${id}`, {        
+                    name,
+                    category,
+                    imageProduct,
+                    description
+                
             }).then(resp => {
                 return resp.data
             })
+            push('/')
+            
         } catch (err) {
             toast.error('Falha no update!', {
                 autoClose: 1000
             })
         }
     }
-    async function deteleProduct(id: string) {
+    async function deleteProduct(id: string) {
         try{
-            const response = await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/${id}`)
+            const response = await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product?id=${id}`)
+            return response
         }catch(err){
             new Error('Erro ao deletar produto')
         }
@@ -70,7 +81,7 @@ export function ProductProvider({ children }: productContextProps) {
             autoClose: 3000
         })
     }
-    async function showProduct(data?: {}) {
+    async function showProduct(name?: string, category?: string) {
         try{
           const productList =  await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/`).then(res => res.data)
             return productList!
@@ -78,10 +89,19 @@ export function ProductProvider({ children }: productContextProps) {
             new Error('Erro ao mostrar produtos')
         }
     }
+    async function findOne(id:string) {
+        try{
+            const product = id && await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/find?id=${id}`)
+            .then(res => res.data[0])
+            return product
+        }catch(err){
+            new Error('Erro ao mostrar produtos')
+        }
+    }
 
 
     return (
-        <ProductContext.Provider value={{ UpdateProduct, deteleProduct, CreateProduct, showProduct }}>
+        <ProductContext.Provider value={{ findOne, UpdateProduct, deleteProduct, CreateProduct, showProduct }}>
             {children}
         </ProductContext.Provider>
     )

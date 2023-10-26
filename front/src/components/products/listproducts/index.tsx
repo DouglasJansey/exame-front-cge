@@ -22,15 +22,14 @@ export default function ListProducts() {
     }])
     useEffect(() => {
         async function getData() {
-            const products: any = await showProduct()
-            console.log(products)
+            const products: any = Card && await showProduct()
             setListProducts(products)
         }
         getData()
     }, [])
     return (
-        <div className={style.flex}>
-            {listProducts.map((product, index) => (
+        <div className={style.listContainer}>
+            {listProducts && listProducts.map((product, index) => (
                 <div key={index + 2}>
                     <Card
                         id={product.id}
@@ -40,7 +39,8 @@ export default function ListProducts() {
                         imageProduct={product.imageProduct} />
                 </div>
 
-            ))}
+            )) 
+            }
         </div>
     )
 }
