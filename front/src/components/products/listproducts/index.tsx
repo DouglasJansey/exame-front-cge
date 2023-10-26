@@ -10,9 +10,7 @@ type ProductType = {
     category: string,
     imageProduct?: string,
 }
-type ProductProps = {
-    showProduct: (data?: ProductType) => Promise<object[]>
-}
+
 const Card = dynamic(() => import('@/components/card'), { ssr: false })
 
 export default function ListProducts() {
