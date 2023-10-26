@@ -26,9 +26,10 @@ const ProductContext = createContext({} as ProductContextType)
 
 export function ProductProvider({ children }: productContextProps) {
     const { push } = useRouter()
+    const PORT = process.env.NEXT_PUBLIC_PORT
     async function CreateProduct({name, description, category, imageProduct}:ProductType) {
         try {
-             const res = await axios.post(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product`, {
+             const res = await axios.post(`${PORT}/product`, {
                 name,
                 description,
                 category,
@@ -53,7 +54,7 @@ export function ProductProvider({ children }: productContextProps) {
     async function UpdateProduct(id:string, data: ProductType) {
         const {name, category, imageProduct, description} = data;
         try {
-            await axios.put(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product?id=${id}`, {        
+            await axios.put(`${PORT}/product?id=${id}`, {        
                     name,
                     category,
                     imageProduct,
@@ -72,7 +73,7 @@ export function ProductProvider({ children }: productContextProps) {
     }
     async function deleteProduct(id: string) {
         try{
-            const response = await axios.delete(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product?id=${id}`)
+            const response = await axios.delete(`${PORT}/product?id=${id}`)
             return response
         }catch(err){
             new Error('Erro ao deletar produto')
@@ -83,7 +84,7 @@ export function ProductProvider({ children }: productContextProps) {
     }
     async function showProduct(name?: string, category?: string) {
         try{
-          const productList =  await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/`).then(res => res.data)
+          const productList =  await axios.get(`${PORT}/product`).then(res => res.data)
             return productList!
         }catch(err){
             new Error('Erro ao mostrar produtos')
@@ -91,7 +92,7 @@ export function ProductProvider({ children }: productContextProps) {
     }
     async function findOne(id:string) {
         try{
-            const product = id && await axios.get(`http://localhost:${process.env.NEXT_PUBLIC_PORT}/product/find?id=${id}`)
+            const product = id && await axios.get(`${PORT}/product/find?id=${id}`)
             .then(res => res.data[0])
             return product
         }catch(err){

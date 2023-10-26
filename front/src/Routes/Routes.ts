@@ -11,6 +11,6 @@ export const ROUTES_TYPES = {
     public:{
         login: '/account/login',
         register: '/account/register',
-        home: '/',
+        home: '/products/listproducts',
     }
 }

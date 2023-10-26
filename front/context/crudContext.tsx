@@ -11,7 +11,7 @@ type UserType = {
 }
 
 type CrudContextType = {
-    CreateUser: (data: UserType) => Promise<void>
+    CreateUser: (data: UserType) => Promise<void> | any
     UpdateUser: (name: string) => Promise<void>
     deteleUser: () => Promise<void>
 }
@@ -25,7 +25,9 @@ export function CrudProvider({ children }: authContextProps) {
     const { push } = useRouter()
 
     async function CreateUser({name, email, password}:UserType) {
-       console.log(name, email, password)
+        if((name === '' || name.length < 4 )) return toast.error(`Nome inválido, precisa ter no mínimo 4 caracteres`, { autoClose: 2000})
+        if( email === '' ) return toast.error('Falha no cadastro!', { autoClose: 1000});
+        if(password === '') return toast.error('Falha no cadastro!', { autoClose: 1000})
         try {
              const res = await axios.post('/api/user', {
                  name,

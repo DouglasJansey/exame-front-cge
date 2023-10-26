@@ -17,7 +17,7 @@ export default function HandlePages() {
 
 
     const currentPage: PagesType = {
-        listproducts: !isAuthenticated && replace('/account/login') || <ListProducts /> ,
+        listproducts: !isAuthenticated && <ListProducts /> ,
         store: <RegisterPeoducts />,
     }
     const closeRouter = currentPage[pages as keyof typeof currentPage]

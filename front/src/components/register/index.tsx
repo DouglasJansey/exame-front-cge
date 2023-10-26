@@ -19,13 +19,9 @@ export default function Register() {
         const {name, value} = ev.target
         setFormData({...formData, [name]: value})
     }
-    const validateInput = () => {
-        if(!formData.email || !formData.password || !formData.name) error = true;
-    }
+
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        console.log(error)
-        validateInput()
+        e.preventDefault();  
         CreateUser(formData)
     }
     return (
