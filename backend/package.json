@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "bun run dev",
-    "prebuild": "bun install",
+    "build": "npm run dev",
+    "prebuild": "npm install",
+    "postinstall": "npx prisma generate",
     "dev": "ts-node-dev src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

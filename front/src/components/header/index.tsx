@@ -10,28 +10,35 @@ import { useAuth } from "../../../context/authContext";
 
 export default function Header() {
   const { isAuthenticated, LogOut } = useAuth();
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
 
   const menu: Array<string> = [
     "Home",
-    "Sobre nós",
-    "Onde estamos",
-    "Contato",
+    "Listar Produtos",
+    "Registrar Produtos",
   ];
 
   const filterWords = (value: string): string => {
     //filtra o path recebido e retorna tudo junto e sem caracter especial
+    //retorna o caminho 
+    const pathPage = {
+      listarprodutos: 'products/listproducts',
+      registrarprodutos: 'products/store',
+      home: ''
+    }
     const path = value
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(" ", "");
-    if(path === 'home') return ''
-    return path;
+
+    return pathPage[path as keyof typeof pathPage];
   };
+
   const activeLink = (url: string) => {
     //compara se o path é igual ao url recebido para ativar a classe que sublinha o link quando for clicado
-    const path = pathname === url
+    const valuePath: any = query?.path
+    const path = `/products/${valuePath}` === url
     const active = path ? style.activePath : style.linkStyle
     return active
   };
@@ -46,7 +53,7 @@ export default function Header() {
                   className={activeLink(`/${filterWords(item)}`)}
                   href={`/${filterWords(item)}`}
                 >
-                  {item}
+                  { !isAuthenticated && item === 'Registrar Produtos' ? '' : item}
                 </Link>
               </div>
             ))}

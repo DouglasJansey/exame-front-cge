@@ -1,0 +1,57 @@
+@import ../_tipography
+@import ../_variable
+
+@mixin backgroundButton($color)
+    background: $color
+
+@keyframes loading
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
+
+@keyframes dash 
+  0% 
+    stroke-dasharray: 1, 150
+    stroke-dashoffset: 0
+  
+  50% 
+    stroke-dasharray: 90, 150
+    stroke-dashoffset: -35
+  
+  100% 
+    stroke-dasharray: 90, 150
+    stroke-dashoffset: -124
+  
+
+
+
+.flex
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    height: 100%
+    
+.loading
+    animation: loading 0.8s linear infinite
+    width: 50px
+    height: 50px
+    min-width: 50px
+    min-height: 50px
+    border: 8px solid $color-dark-blue
+    border-top: 8px solid #fff
+    border-radius: 100%
+
+.container
+    @extend .flex
+    align-items: center
+    position: relative
+    flex: none
+    margin-top: 150px
+    width: 100%
+    height: 100%
+    overflow: hidden
+        
+
+
